@@ -1,0 +1,53 @@
+﻿    @model Renta_de_Peliculas.Models.Clientes
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+    <h3>Eliminar clientes</h3>
+
+    <h4>Esta seguro de eliminar este cliente</h4>
+    
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th></th>
+
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.telefono)
+        </td>
+        <td>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-danger"/> 
+                    @Html.ActionLink("Atras", "Index")
+                </div>
+             }
+        </td>
+    </tr>
+
+</table>
+
+   
+

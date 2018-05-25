@@ -1,0 +1,47 @@
+﻿@model Renta_de_Peliculas.Models.Clientes
+
+@{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Detalle clientes.</h2>
+
+
+   
+
+            <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th></th>
+
+        </tr>
+  
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.telefono)
+                </td>
+                <td>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.idCliente }) |
+                        @Html.ActionLink("Atras", "Index")
+                    </p>
+                 </td>
+                </tr>
+    
+        </table>
+
+

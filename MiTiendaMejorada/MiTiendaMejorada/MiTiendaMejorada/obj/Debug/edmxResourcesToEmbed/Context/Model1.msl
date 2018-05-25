@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Mi_TiendaModelStoreContainer" CdmEntityContainer="Mi_TiendaEntities">
+    <EntitySetMapping Name="tb_productos">
+      <EntityTypeMapping TypeName="Mi_TiendaModel.tb_productos">
+        <MappingFragment StoreEntitySet="tb_productos">
+          <ScalarProperty Name="id_productos" ColumnName="id_productos" />
+          <ScalarProperty Name="producto_nombre" ColumnName="producto_nombre" />
+          <ScalarProperty Name="producto_precio" ColumnName="producto_precio" />
+          <ScalarProperty Name="producto_cantidad" ColumnName="producto_cantidad" />
+          <ScalarProperty Name="producto_descripcion" ColumnName="producto_descripcion" />
+          <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_proveedores">
+      <EntityTypeMapping TypeName="Mi_TiendaModel.tb_proveedores">
+        <MappingFragment StoreEntitySet="tb_proveedores">
+          <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+          <ScalarProperty Name="nombre_proveedor" ColumnName="nombre_proveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_ventas">
+      <EntityTypeMapping TypeName="Mi_TiendaModel.tb_ventas">
+        <MappingFragment StoreEntitySet="tb_ventas">
+          <ScalarProperty Name="venta_total" ColumnName="venta_total" />
+          <ScalarProperty Name="id_ventas" ColumnName="id_ventas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

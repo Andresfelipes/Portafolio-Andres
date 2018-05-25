@@ -1,0 +1,1 @@
+c:\users\fs_2017\documents\visual studio 2015\Projects\CrudAndresMVC\CrudAndresMVC\obj\Debug\CrudAndresMVC.csprojResolveAssemblyReference.cache

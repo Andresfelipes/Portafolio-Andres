@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Renta_de_Peliculas.Models.Peliculas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Peliculas</h2>
+
+<p>
+    @Html.ActionLink("Agregar pelicula", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.director)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.genero)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.director)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.genero)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idPelicula }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idPelicula }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idPelicula })
+        </td>
+    </tr>
+}
+
+</table>

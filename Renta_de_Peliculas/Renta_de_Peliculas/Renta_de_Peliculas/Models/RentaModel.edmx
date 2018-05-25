@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBpeliculasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" />
+          <Property Name="apellidos" Type="nchar" MaxLength="50" />
+          <Property Name="telefono" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Peliculas">
+          <Key>
+            <PropertyRef Name="idPelicula" />
+          </Key>
+          <Property Name="idPelicula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="director" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="genero" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rentas">
+          <Key>
+            <PropertyRef Name="idRenta" />
+          </Key>
+          <Property Name="idRenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idPelicula" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Rentas_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rentas_Peliculas">
+          <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peliculas">
+              <PropertyRef Name="idPelicula" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="idPelicula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rentas_Rentas">
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="1" />
+          <End Role="Rentas1" Type="Self.Rentas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Rentas">
+              <PropertyRef Name="idRenta" />
+            </Principal>
+            <Dependent Role="Rentas1">
+              <PropertyRef Name="idRenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBpeliculasModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peliculas" EntityType="Self.Peliculas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rentas" EntityType="Self.Rentas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rentas_Clientes" Association="Self.FK_Rentas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rentas_Peliculas" Association="Self.FK_Rentas_Peliculas">
+            <End Role="Peliculas" EntitySet="Peliculas" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rentas_Rentas" Association="Self.FK_Rentas_Rentas">
+            <End Role="Rentas" EntitySet="Rentas" />
+            <End Role="Rentas1" EntitySet="Rentas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBpeliculasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Rentas" Relationship="Self.FK_Rentas_Clientes" FromRole="Clientes" ToRole="Rentas" />
+        </EntityType>
+        <EntityType Name="Peliculas">
+          <Key>
+            <PropertyRef Name="idPelicula" />
+          </Key>
+          <Property Name="idPelicula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titulo" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="director" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Rentas" Relationship="Self.FK_Rentas_Peliculas" FromRole="Peliculas" ToRole="Rentas" />
+        </EntityType>
+        <EntityType Name="Rentas">
+          <Key>
+            <PropertyRef Name="idRenta" />
+          </Key>
+          <Property Name="idRenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idPelicula" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_Rentas_Clientes" FromRole="Rentas" ToRole="Clientes" />
+          <NavigationProperty Name="Peliculas" Relationship="Self.FK_Rentas_Peliculas" FromRole="Rentas" ToRole="Peliculas" />
+          <NavigationProperty Name="Rentas1" Relationship="Self.FK_Rentas_Rentas" FromRole="Rentas" ToRole="Rentas1" />
+          <NavigationProperty Name="Rentas2" Relationship="Self.FK_Rentas_Rentas" FromRole="Rentas1" ToRole="Rentas" />
+        </EntityType>
+        <Association Name="FK_Rentas_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rentas_Peliculas">
+          <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peliculas">
+              <PropertyRef Name="idPelicula" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="idPelicula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rentas_Rentas">
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="1" />
+          <End Role="Rentas1" Type="Self.Rentas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Rentas">
+              <PropertyRef Name="idRenta" />
+            </Principal>
+            <Dependent Role="Rentas1">
+              <PropertyRef Name="idRenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBpeliculasEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Peliculas" EntityType="Self.Peliculas" />
+          <EntitySet Name="Rentas" EntityType="Self.Rentas" />
+          <AssociationSet Name="FK_Rentas_Clientes" Association="Self.FK_Rentas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rentas_Peliculas" Association="Self.FK_Rentas_Peliculas">
+            <End Role="Peliculas" EntitySet="Peliculas" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rentas_Rentas" Association="Self.FK_Rentas_Rentas">
+            <End Role="Rentas" EntitySet="Rentas" />
+            <End Role="Rentas1" EntitySet="Rentas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBpeliculasModelStoreContainer" CdmEntityContainer="DBpeliculasEntities1">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="DBpeliculasModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peliculas">
+            <EntityTypeMapping TypeName="DBpeliculasModel.Peliculas">
+              <MappingFragment StoreEntitySet="Peliculas">
+                <ScalarProperty Name="idPelicula" ColumnName="idPelicula" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="director" ColumnName="director" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rentas">
+            <EntityTypeMapping TypeName="DBpeliculasModel.Rentas">
+              <MappingFragment StoreEntitySet="Rentas">
+                <ScalarProperty Name="idRenta" ColumnName="idRenta" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idPelicula" ColumnName="idPelicula" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

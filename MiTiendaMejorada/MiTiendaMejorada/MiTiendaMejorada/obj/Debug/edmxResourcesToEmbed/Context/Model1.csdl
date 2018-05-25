@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mi_TiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tb_productos">
+    <Key>
+      <PropertyRef Name="id_productos" />
+    </Key>
+    <Property Name="id_productos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="producto_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="producto_precio" Type="Int64" Nullable="false" />
+    <Property Name="producto_cantidad" Type="Int32" Nullable="false" />
+    <Property Name="producto_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="id_proveedor" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tb_proveedores" Relationship="Self.FK_tb_productos_tb_proveedores" FromRole="tb_productos" ToRole="tb_proveedores" />
+  </EntityType>
+  <EntityType Name="tb_proveedores">
+    <Key>
+      <PropertyRef Name="id_proveedor" />
+    </Key>
+    <Property Name="id_proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tb_productos" Relationship="Self.FK_tb_productos_tb_proveedores" FromRole="tb_proveedores" ToRole="tb_productos" />
+  </EntityType>
+  <Association Name="FK_tb_productos_tb_proveedores">
+    <End Role="tb_proveedores" Type="Self.tb_proveedores" Multiplicity="1" />
+    <End Role="tb_productos" Type="Self.tb_productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_proveedores">
+        <PropertyRef Name="id_proveedor" />
+      </Principal>
+      <Dependent Role="tb_productos">
+        <PropertyRef Name="id_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Mi_TiendaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tb_productos" EntityType="Self.tb_productos" />
+    <EntitySet Name="tb_proveedores" EntityType="Self.tb_proveedores" />
+    <AssociationSet Name="FK_tb_productos_tb_proveedores" Association="Self.FK_tb_productos_tb_proveedores">
+      <End Role="tb_proveedores" EntitySet="tb_proveedores" />
+      <End Role="tb_productos" EntitySet="tb_productos" />
+    </AssociationSet>
+    <EntitySet Name="tb_ventas" EntityType="Mi_TiendaModel.tb_ventas" />
+  </EntityContainer>
+  <EntityType Name="tb_ventas">
+    <Key>
+      <PropertyRef Name="id_ventas" />
+    </Key>
+    <Property Name="id_ventas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="venta_total" Type="Int32" Nullable="false" />
+  </EntityType>
+</Schema>

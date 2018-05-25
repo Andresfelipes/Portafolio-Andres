@@ -1,0 +1,58 @@
+﻿@model MiTiendaMejorada.Context.tb_productos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_productos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.producto_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producto_precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto_precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producto_cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto_cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.producto_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.producto_descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_proveedores.nombre_proveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_proveedores.nombre_proveedor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_productos }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
